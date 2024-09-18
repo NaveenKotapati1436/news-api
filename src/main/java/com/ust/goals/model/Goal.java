@@ -1,9 +1,8 @@
 package com.ust.goals.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import com.ust.goals.model.Priority;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,8 @@ public class Goal {
     private String name;
     private Double value;
     private String description;
-    private String priority; // Low, Medium, High
+    @Enumerated(EnumType.STRING)
+    private Priority priority; // Low, Medium, High
     private Integer durationInMonths;
 }
 

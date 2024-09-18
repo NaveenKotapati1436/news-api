@@ -56,3 +56,53 @@ public class GoalService {
         goalRepository.deleteById(id);
     }
 }
+
+
+
+
+//
+//@Service
+//public class GoalService {
+//
+//    private static final Logger logger = LoggerFactory.getLogger(GoalService.class);
+//    private final GoalRepository goalRepository;
+//
+//    public GoalService(GoalRepository goalRepository) {
+//        this.goalRepository = goalRepository;
+//    }
+//
+//    public Goal createGoal(GoalDto goalDto) {
+//        try {
+//            Goal goal = new Goal();
+//            goal.setName(goalDto.getName());
+//            goal.setValue(goalDto.getValue());
+//            goal.setDescription(goalDto.getDescription());
+//            goal.setPriority(goalDto.getPriority());
+//            goal.setDurationInMonths(goalDto.getDurationInMonths());
+//            return goalRepository.save(goal);
+//        } catch (Exception e) {
+//            logger.error("Error creating goal: ", e);
+//            throw new GoalServiceException("Failed to create goal", e);
+//        }
+//    }
+//
+//    public List<Goal> getAllGoals() {
+//        return goalRepository.findAll();
+//    }
+//
+//    public Goal getGoalById(Long id) {
+//        return goalRepository.findById(id)
+//                .orElseThrow(() -> {
+//                    logger.error("Goal not found with id: {}", id);
+//                    return new GoalNotFoundException("Goal not found with id: " + id);
+//                });
+//    }
+//
+//    public void deleteGoal(Long id) {
+//        if (!goalRepository.existsById(id)) {
+//            logger.error("Goal not found with id: {}", id);
+//            throw new GoalNotFoundException("Goal not found with id: " + id);
+//        }
+//        goalRepository.deleteById(id);
+//    }
+//}

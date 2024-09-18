@@ -1,5 +1,6 @@
 package com.ust.goals.dto;
 
+import com.ust.goals.model.Priority;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +20,8 @@ public class GoalDto {
 
     private String description;
 
-    @NotBlank(message = "Priority cannot be blank")
-    private String priority; // Consider using an enum for priority
+    @NotNull(message = "Priority cannot be null")
+    private Priority priority; // Changed to Priority enum
 
     private Integer durationInMonths;
 }
