@@ -1,15 +1,20 @@
 package com.ust.goals.service;
 
 import com.ust.goals.dto.GoalDto;
+import com.ust.goals.exceptions.GoalNotFoundException;
+import com.ust.goals.exceptions.GoalServiceException;
 import com.ust.goals.model.Goal;
 import com.ust.goals.repository.GoalRepository;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Service
 public class GoalService {
 
+    private static final Logger logger = LoggerFactory.getLogger(GoalService.class);
     private final GoalRepository goalRepository;
 
     public GoalService(GoalRepository goalRepository) {
@@ -17,12 +22,18 @@ public class GoalService {
     }
 
     public Goal createGoal(GoalDto goalDto) {
-        Goal goal = new Goal();
-        goal.setName(goalDto.getName());
-        goal.setValue(goalDto.getValue());
-        goal.setDescription(goalDto.getDescription());
-        goal.setPriority(goalDto.getPriority());
-        return goalRepository.save(goal);
+        try {
+            Goal goal = new Goal();
+            goal.setName(goalDto.getName());
+            goal.setValue(goalDto.getValue());
+            goal.setDescription(goalDto.getDescription());
+            goal.setPriority(goalDto.getPriority());
+            goal.setDurationInMonths(goalDto.getDurationInMonths());
+            return goalRepository.save(goal);
+        } catch (Exception e) {
+            logger.error("Error creating goal: ", e);
+            throw new GoalServiceException("Failed to create goal", e);
+        }
     }
 
     public List<Goal> getAllGoals() {
@@ -30,10 +41,18 @@ public class GoalService {
     }
 
     public Goal getGoalById(Long id) {
-        return goalRepository.findById(id).orElse(null);
+        return goalRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.error("Goal not found with id: {}", id);
+                    return new GoalNotFoundException("Goal not found with id: " + id);
+                });
     }
 
     public void deleteGoal(Long id) {
+        if (!goalRepository.existsById(id)) {
+            logger.error("Goal not found with id: {}", id);
+            throw new GoalNotFoundException("Goal not found with id: " + id);
+        }
         goalRepository.deleteById(id);
     }
 }

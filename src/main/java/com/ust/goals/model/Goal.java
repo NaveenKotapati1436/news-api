@@ -23,5 +23,6 @@ public class Goal {
     private Double value;
     private String description;
     private String priority; // Low, Medium, High
+    private Integer durationInMonths;
 }
 
