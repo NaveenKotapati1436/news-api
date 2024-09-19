@@ -40,3 +40,25 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
+
+
+
+
+
+# changes
+# install bootstrap
+# npm intall jquery
+# npm i --save-dev @types/jquery
+
+# angular.json
+# "styles": [
+#               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+#               "src/styles.css"
+#             ],
+#             "scripts": [
+#               "node_modules/jquery/dist/jquery.min.js",
+#               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+#             ]
+
