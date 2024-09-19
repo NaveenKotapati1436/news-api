@@ -15,6 +15,7 @@ import { GoalService } from '../services/goal.service';
 })
 export class GoalComponent implements OnInit {
 
+
   goal: GoalDto = {
     name: '',
     value: 0,
@@ -33,6 +34,11 @@ export class GoalComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (!this.goal.name || this.goal.value <= 0 || this.goal.durationInMonths <= 0) {
+      alert('All fields are required, and value/duration must be greater than zero!');
+      return;
+    }
+
     this.goalService.createGoal(this.goal).subscribe(() => {
       this.loadGoals();
       this.resetForm();
@@ -45,22 +51,18 @@ export class GoalComponent implements OnInit {
     });
   }
 
-  
-  confirmDelete(goalId: number) {
+  confirmDelete(goalId: number): void {
     const confirmDelete = window.confirm('Are you sure you want to delete this goal?');
     if (confirmDelete) {
       this.deleteGoal(goalId);
     }
   }
 
-  deleteGoal(goalId: number) {
+  deleteGoal(goalId: number): void {
     this.goalService.deleteGoal(goalId).subscribe(() => {
       this.loadGoals(); // Refresh the list of goals
     });
   }
-
- 
-
 
   resetForm(): void {
     this.goal = {
@@ -81,21 +83,30 @@ export class GoalComponent implements OnInit {
 
 
 
+
+
+
+
+
+
 //   goal: GoalDto = {
 //     name: '',
 //     value: 0,
 //     description: '',
-//     priority: 'HIGH',  // Default value, adjust as necessary
+//     priority: 'HIGH',
 //     durationInMonths: 0
 //   };
 //   goals: any[] = [];
 //   priorities: string[] = ['HIGH', 'MEDIUM', 'LOW'];
+//   goalIdToDelete: number | null = null;
 
 //   constructor(private goalService: GoalService) { }
 
 //   ngOnInit(): void {
 //     this.loadGoals();
 //   }
+
+  
 
 //   onSubmit(): void {
 //     this.goalService.createGoal(this.goal).subscribe(() => {
@@ -110,11 +121,22 @@ export class GoalComponent implements OnInit {
 //     });
 //   }
 
-//   deleteGoal(id: number): void {
-//     this.goalService.deleteGoal(id).subscribe(() => {
-//       this.loadGoals();
+  
+//   confirmDelete(goalId: number) {
+//     const confirmDelete = window.confirm('Are you sure you want to delete this goal?');
+//     if (confirmDelete) {
+//       this.deleteGoal(goalId);
+//     }
+//   }
+
+//   deleteGoal(goalId: number) {
+//     this.goalService.deleteGoal(goalId).subscribe(() => {
+//       this.loadGoals(); // Refresh the list of goals
 //     });
 //   }
+
+ 
+
 
 //   resetForm(): void {
 //     this.goal = {
@@ -126,3 +148,10 @@ export class GoalComponent implements OnInit {
 //     };
 //   }
 // }
+
+
+
+
+
+
+
