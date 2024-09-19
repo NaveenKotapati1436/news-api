@@ -31,13 +31,39 @@ public class GoalService {
             goal.setDurationInMonths(goalDto.getDurationInMonths());
             return goalRepository.save(goal);
         } catch (Exception e) {
-            logger.error("Error creating goal: ", e);
+            logger.error("Error creating goal", e);
             throw new GoalServiceException("Failed to create goal", e);
         }
     }
 
+//    public Goal createGoal(GoalDto goalDto) {
+//        try {
+//            Goal goal = new Goal();
+//            goal.setName(goalDto.getName());
+//            goal.setValue(goalDto.getValue());
+//            goal.setDescription(goalDto.getDescription());
+//            goal.setPriority(goalDto.getPriority());
+//            goal.setDurationInMonths(goalDto.getDurationInMonths());
+//            return goalRepository.save(goal);
+//        } catch (Exception e) {
+//            logger.error("Error creating goal: ", e);
+//            throw new GoalServiceException("Failed to create goal", e);
+//        }
+//    }
+
+//    public List<Goal> getAllGoals() {
+//        return goalRepository.findAll();
+//    }
+
     public List<Goal> getAllGoals() {
-        return goalRepository.findAll();
+        try {
+            List<Goal> goals = goalRepository.findAll();
+            logger.info("Successfully fetched all goals, count: {}", goals.size());
+            return goals;
+        } catch (Exception e) {
+            logger.error("Error occurred while fetching goals", e);
+            throw new GoalServiceException("Failed to fetch goals", e);
+        }
     }
 
     public Goal getGoalById(Long id) {
