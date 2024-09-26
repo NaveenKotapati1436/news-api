@@ -50,15 +50,15 @@ public class GoalController {
 //    }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Goal> getGoalById(@PathVariable Long id) {
-        Goal goal = goalService.getGoalById(id);
+    @GetMapping("/{Id}")
+    public ResponseEntity<Goal> getGoalById(@PathVariable Long Id) {
+        Goal goal = goalService.getGoalById(Id);
         return ResponseEntity.ok(goal);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGoal(@PathVariable Long id) {
-        goalService.deleteGoal(id);
+    @DeleteMapping("/{Id}")
+    public ResponseEntity<Void> deleteGoal(@PathVariable Long Id) {
+        goalService.deleteGoal(Id);
         return ResponseEntity.noContent().build();
     }
 }

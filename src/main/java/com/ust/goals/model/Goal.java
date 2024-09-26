@@ -18,12 +18,13 @@ public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private Double value;
     private String description;
     @Enumerated(EnumType.STRING)
     private Priority priority; // Low, Medium, High
     private Integer durationInMonths;
+
+
 }
 

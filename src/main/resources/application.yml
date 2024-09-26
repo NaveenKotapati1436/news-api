@@ -2,7 +2,7 @@ spring:
   application:
     name: goals
   datasource:
-    url: jdbc:mysql://localhost:3306/finances
+    url: jdbc:mysql://localhost:3306/finmaster
     username: root
     password: 994821@Nav
     driver-class-name: com.mysql.cj.jdbc.Driver

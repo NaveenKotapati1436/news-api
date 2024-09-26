@@ -66,20 +66,20 @@ public class GoalService {
         }
     }
 
-    public Goal getGoalById(Long id) {
-        return goalRepository.findById(id)
+    public Goal getGoalById(Long goalId) {
+        return goalRepository.findById(goalId)
                 .orElseThrow(() -> {
-                    logger.error("Goal not found with id: {}", id);
-                    return new GoalNotFoundException("Goal not found with id: " + id);
+                    logger.error("Goal not found with id: {}", goalId);
+                    return new GoalNotFoundException("Goal not found with id: " + goalId);
                 });
     }
 
-    public void deleteGoal(Long id) {
-        if (!goalRepository.existsById(id)) {
-            logger.error("Goal not found with id: {}", id);
-            throw new GoalNotFoundException("Goal not found with id: " + id);
+    public void deleteGoal(Long goalId) {
+        if (!goalRepository.existsById(goalId)) {
+            logger.error("Goal not found with id: {}", goalId);
+            throw new GoalNotFoundException("Goal not found with id: " + goalId);
         }
-        goalRepository.deleteById(id);
+        goalRepository.deleteById(goalId);
     }
 }
 
